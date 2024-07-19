@@ -57,7 +57,7 @@ body {
 }
 
 #currentDisplay h3 {
-  margin: 10px 0;
+  margin: 40px 0;
   font-size: 30px;
   
 }
@@ -123,3 +123,16 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+@media (max-width: 1200px) {
+  .container {
+    width: 70%;
+  }
+  @media (max-width: 768px) {
+    .container {
+      width: 70%;
+    }
+    @media (max-width: 480px) {
+      .container {
+        width: 60%;
+        padding: 10px;
+      }
