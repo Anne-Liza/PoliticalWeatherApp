@@ -24,7 +24,7 @@ function search(event) {
     .then(data => {
         console.log('Current Weather Data:', data);
 
-        if (!data || data.cod !== 200) {
+        if (data == 0) {
             alert("City not found. Please try again.");
             cityName.innerHTML = '';
             currentTemp.innerHTML = '';
