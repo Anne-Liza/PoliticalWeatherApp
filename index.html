@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js"defer></script>
+    <link rel="stylesheet" href="./index.css">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+    <div id="weatherapp">
+        <header>
+            <form id="searchForm">
+                <input type="text"
+                required
+                id="search"
+                placeholder="Enter Your City"
+                type="button">
+                <button type ="submit" id="searchbutton">Go</button>
+            </form>
+        </header>        
+    </div>
+    <div id="currentDisplay">
+        <h1 id="cityName">Nairobi</h1>
+        <div id="currentTemp">
+            <p id="currentDescription"></p>
+            <h3>24°C|74°F</h3>          
+        </div>
+    </div>
+    <p id="currentDate">Thursday, 10:14pm</p>
+    <br>
+    <p id="currentHumidity">Humidity: <strong>87%</strong></p>
+    <p id="currentWind">Wind: <strong>60km/hr</strong></p>
+
+    <div id="forecastDisplay">   
+        
+</div>
+
+    <footer>
+        This app was codes by <a href="">Anne Wangui</a> on <a href="">Github</a> and is hosted by <a href="">Netlify.</a>
+    </footer>
+</div>
+</body>
+</html>
