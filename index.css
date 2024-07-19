@@ -1,0 +1,125 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f0f0f0;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+#searchForm {
+  margin-bottom: 20px;
+}
+
+#searchForm input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  background-color: #F9F7FE;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#searchForm button[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  background-color: #885DF1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#searchForm button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#currentDisplay {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#currentDisplay h1 {
+  margin: 32px 0;
+  font-size: 40px;
+  
+}
+
+#currentDisplay h3 {
+  margin: 10px 0;
+  font-size: 30px;
+  
+}
+
+#currentDescription  {
+  margin: 5px 0;
+  display: flex;
+  font-size: 16px;
+}
+
+#currentDate{
+  color: #acb3b3;
+  margin-top: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+#forecastDisplay {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#forecastDisplay .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+#forecastDisplay .col {
+  padding: 1px;
+  margin: 2px;
+  border-radius: 1px;
+  width: 20%;
+  text-align: center;
+  
+}
+#forecastDisplay .forecast-max-temp {
+  color: #ff4500;
+  font-weight: bold;
+}
+
+#forecastDisplay .forecast-min-temp {
+  color: #1e90ff;
+  font-weight: lighter;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+}
+
+footer a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
