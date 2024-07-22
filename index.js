@@ -56,54 +56,62 @@ function search(event) {
        
     })
         
-   // Clear current forecast data
-     forecastDisplay.innerHTML = '';
+   
+    // Clear current forecast data
+        forecastDisplay.innerHTML = '';
 
-      
-    // Forecast URL
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&cnt=6`;
-
-    
-    // Fetch forecast data
-    fetch(forecastUrl)
-    .then(response => response.json())
-    .then(forecastData => {
-        console.log('Forecast Data:', forecastData);
-
-        if (forecastData.cod !=="200") {
-            alert("Forecast not available.");
             
-        } else {
-            const daysOfWeek = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"]
-        // Extract forecast data
-         forecastData.list.forEach((day, index) => {
-            if (index < 6) {
-                const date = new Date(day.dt * 1000);
-                const dayOfWeek = daysOfWeek[date.getDay()];
-                const foreCelsius = currentTempCelsius(day.main.temp);
-                const foreFahrenheit = currentTempFahrenheit(foreCelsius);
-                const minCelsius = currentTempCelsius(day.main.temp_min);
-                const minFahrenheit = currentTempFahrenheit(minCelsius);
-                const icon = day.weather[0].icon;
+    // Forecast URL
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&cnt=40`;
 
-                // Display forecast
-                forecastDisplay.innerHTML += `
+    fetch (forecastUrl)
+    .then(response => response.json())
+    .then (forecastData => {
+     
+
+    if (forecastData.cod !=="200") {
+        alert("Forecast not available.");
+        
+    } else {
+        const daysOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    
+
+        // Filter 
+        const uniqueDays = forecastData.list.filter((day, index, self) => {
+            const date = new Date(day.dt * 1000).toDateString();
+
+            return index === self.findIndex(d => new Date(d.dt * 1000).toDateString() === date);
+        });
+
+        // Map the filtered data
+        const forecastsHTML = uniqueDays.slice(0, 6).map(day => {
+            const date = new Date(day.dt * 1000);
+            const dayOfWeek = daysOfWeek[date.getDay()];
+            const foreCelsius = currentTempCelsius(day.main.temp);
+            const foreFahrenheit = currentTempFahrenheit(foreCelsius);
+            const minCelsius = currentTempCelsius(day.main.temp_min);
+            const minFahrenheit =currentTempFahrenheit(minCelsius);
+            const icon = day.weather[0].icon;
+
+
+            return `
                 <div class="col">
-                    <p class="foreDate">${dayOfWeek}</p>
-                    <p class="foreIcon"><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${day.weather[0].description}"></p>
-                    <p class="foreTemp">
-                        <span class="forecast-max-temp"><strong>${foreCelsius}°C</strong></span>
-                        <span class="forecast-min-temp">${minCelsius}°C</span>
-                    </p>
+                <p class="foreDate">${dayOfWeek}</p>
+                <p class="foreIcon"><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${day.weather[0].description}"></p>
+                <p class="foreTemp">
+                <span class="forecast-max-temp"><strong>${foreCelsius}°C</strong></span> |<span class="forecast-max-temp"><strong>${foreFahrenheit}°F</strong></span>
+                <span class="forecast-min-temp">${minCelsius}°C</span> |<span class="forecast-min-temp">${minFahrenheit}°F</span>
+                </p>
                 </div>
                 `;
-            }
-         })
 
-        }
-        
+        }).join('');
 
+        // display
+        forecastDisplay.innerHTML = forecastsHTML;
+    }
     })
+        
 
 
 }
