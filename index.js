@@ -99,8 +99,8 @@ function search(event) {
                 <p class="foreDate">${dayOfWeek}</p>
                 <p class="foreIcon"><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${day.weather[0].description}"></p>
                 <p class="foreTemp">
-                <span class="forecast-max-temp"><strong>${foreCelsius}°C</strong></span> |<span class="forecast-max-temp"><strong>${foreFahrenheit}°F</strong></span>
-                <span class="forecast-min-temp">${minCelsius}°C</span> |<span class="forecast-min-temp">${minFahrenheit}°F</span>
+                <span class="forecast-max-temp"><strong>${foreCelsius}°C</strong></span> | <span class="forecast-max-temp"><strong>${foreFahrenheit}°F</strong></span>
+                <span class="forecast-min-temp">${minCelsius}°C</span> | <span class="forecast-min-temp">${minFahrenheit}°F</span>
                 </p>
                 </div>
                 `;
