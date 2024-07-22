@@ -53,49 +53,59 @@ function search(event) {
             wind.innerHTML = `Wind: <strong>${windSpeed} km/h</strong>`;
         }
 
-        // Clear current forecast data
-        forecastDisplay.innerHTML = '';
-
-        // Forecast URL
-        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&cnt=6`;
-
-        // Fetch forecast data
-        fetch(forecastUrl)
-        .then(response => response.json())
-        .then(forecastData => {
-            console.log('Forecast Data:', forecastData);
-
-            // Handle errors in fetching forecast data
-            if (!forecastData || forecastData.cod !== '200') {
-                alert("Forecast not available");
-            } else {
-                // Extract forecast data
-                forecastData.list.forEach((day, index) => {
-                    if (index < 5) {
-                        const dayOfWeek = new Date(day.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
-                        const foreCelsius = currentTempCelsius(day.main.temp);
-                        const foreFahrenheit = currentTempFahrenheit(foreCelsius);
-                        const minCelsius = currentTempCelsius(day.main.temp_min);
-                        const minFahrenheit = currentTempFahrenheit(minCelsius);
-                        const icon = day.weather[0].icon;
-
-                        // Display forecast
-                        forecastDisplay.innerHTML += `
-                        <div class="col">
-                            <p class="foreDate">${dayOfWeek}</p>
-                            <p class="foreIcon"><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${day.weather[0].description}"></p>
-                            <p class="foreTemp">
-                                <span class="forecast-max-temp"><strong>${foreCelsius}°C</strong></span>
-                                <span class="forecast-min-temp">${minCelsius}°C</span>
-                            </p>
-                        </div>`;
-                    }
-                });
-            }
-        })
-        
+       
     })
+        
+   // Clear current forecast data
+     forecastDisplay.innerHTML = '';
+
+      
+    // Forecast URL
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&cnt=6`;
+
     
+    // Fetch forecast data
+    fetch(forecastUrl)
+    .then(response => response.json())
+    .then(forecastData => {
+        console.log('Forecast Data:', forecastData);
+
+        if (forecastData.cod !=="200") {
+            alert("Forecast not available.");
+            
+        } else {
+            const daysOfWeek = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"]
+        // Extract forecast data
+         forecastData.list.forEach((day, index) => {
+            if (index < 6) {
+                const date = new Date(day.dt * 1000);
+                const dayOfWeek = daysOfWeek[date.getDay()];
+                const foreCelsius = currentTempCelsius(day.main.temp);
+                const foreFahrenheit = currentTempFahrenheit(foreCelsius);
+                const minCelsius = currentTempCelsius(day.main.temp_min);
+                const minFahrenheit = currentTempFahrenheit(minCelsius);
+                const icon = day.weather[0].icon;
+
+                // Display forecast
+                forecastDisplay.innerHTML += `
+                <div class="col">
+                    <p class="foreDate">${dayOfWeek}</p>
+                    <p class="foreIcon"><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${day.weather[0].description}"></p>
+                    <p class="foreTemp">
+                        <span class="forecast-max-temp"><strong>${foreCelsius}°C</strong></span>
+                        <span class="forecast-min-temp">${minCelsius}°C</span>
+                    </p>
+                </div>
+                `;
+            }
+         })
+
+        }
+        
+
+    })
+
+
 }
 
 // Add event listener to the form
